@@ -6,6 +6,7 @@ import {
   ListView,
   TextInput
 } from 'react-native'
+import AnimationView from './AnimationView'
 
 const renderRow = (record) => (
   <Text style={ styles.text }>{ record.givenName }</Text>
@@ -27,11 +28,13 @@ const ContactsList = ({dataSource}) => (
 const Main = (props) => (
   <View>
     <TextInput
-      style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+      placeholder='Type to filter...'
+      style={{height: 40, borderColor: 'gray', borderWidth: 1, marginTop: 20}}
       onChangeText={(text) => props.filterTyping(text)}
       value={props.filterText}
     />
     <ContactsList {...props} />
+    <AnimationView />
   </View>
 )
 
