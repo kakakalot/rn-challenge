@@ -14,7 +14,11 @@ class AnimationView extends React.Component {
       squareY: new Animated.Value(0),
       squareX: new Animated.Value(0),
       rotation: new Animated.Value(0),
-      color: new Animated.Value(0)
+      color: new Animated.Value(0),
+      topLeft: new Animated.Value(2),
+      topRight: new Animated.Value(2),
+      bottomLeft: new Animated.Value(2),
+      bottomRight: new Animated.Value(2)
     }
 
     this.width = Dimensions.get('window').width
@@ -34,7 +38,7 @@ class AnimationView extends React.Component {
         Animated.timing(
           this.state.squareX,
           {
-            toValue: 300,
+            toValue: 200,
             duration: 3000
           }
         ),
@@ -53,7 +57,41 @@ class AnimationView extends React.Component {
             duration: 3000,
             easing: Easing.linear
           }
-        )
+        ),
+        Animated.sequence([
+          Animated.timing(
+            this.state.bottomRight,
+            {
+              toValue: 100,
+              duration: 750,
+              easing: Easing.linear
+            }
+          ),
+          Animated.timing(
+            this.state.bottomLeft,
+            {
+              toValue: 100,
+              duration: 750,
+              easing: Easing.linear
+            }
+          ),
+          Animated.timing(
+            this.state.topRight,
+            {
+              toValue: 100,
+              duration: 750,
+              easing: Easing.linear
+            }
+          ),
+          Animated.timing(
+            this.state.topLeft,
+            {
+              toValue: 100,
+              duration: 750,
+              easing: Easing.linear
+            }
+          )
+        ])
       ])
     ]).start()
   }
@@ -83,7 +121,13 @@ class AnimationView extends React.Component {
             {backgroundColor: this.state.color.interpolate({
               inputRange: [0, 150],
               outputRange: ['rgba(255,0,0, 1)', 'rgba(51,156,177, 1)']
-            })}
+            })},
+            {
+              borderBottomRightRadius: Animated.divide(this.state.bottomRight, new Animated.Value(2)),
+              borderBottomLeftRadius: Animated.divide(this.state.bottomLeft, new Animated.Value(2)),
+              borderTopRightRadius: Animated.divide(this.state.topRight, new Animated.Value(2)),
+              borderTopLeftRadius: Animated.divide(this.state.topLeft, new Animated.Value(2))
+            }
           ]} />
       </View>
     )
