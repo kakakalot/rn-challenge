@@ -18,7 +18,8 @@ class AnimationView extends React.Component {
       topLeft: new Animated.Value(2),
       topRight: new Animated.Value(2),
       bottomLeft: new Animated.Value(2),
-      bottomRight: new Animated.Value(2)
+      bottomRight: new Animated.Value(2),
+      fadeOut: new Animated.Value(1)
     }
 
     this.width = Dimensions.get('window').width
@@ -39,14 +40,14 @@ class AnimationView extends React.Component {
           this.state.squareX,
           {
             toValue: 200,
-            duration: 3000
+            duration: 3500
           }
         ),
         Animated.timing(
           this.state.rotation,
           {
             toValue: 1,
-            duration: 3000,
+            duration: 3500,
             easing: Easing.linear
           }
         ),
@@ -54,7 +55,7 @@ class AnimationView extends React.Component {
           this.state.color,
           {
             toValue: 150,
-            duration: 3000,
+            duration: 3500,
             easing: Easing.linear
           }
         ),
@@ -63,7 +64,7 @@ class AnimationView extends React.Component {
             this.state.bottomRight,
             {
               toValue: 100,
-              duration: 750,
+              duration: 700,
               easing: Easing.linear
             }
           ),
@@ -71,7 +72,7 @@ class AnimationView extends React.Component {
             this.state.bottomLeft,
             {
               toValue: 100,
-              duration: 750,
+              duration: 700,
               easing: Easing.linear
             }
           ),
@@ -79,7 +80,7 @@ class AnimationView extends React.Component {
             this.state.topRight,
             {
               toValue: 100,
-              duration: 750,
+              duration: 700,
               easing: Easing.linear
             }
           ),
@@ -87,8 +88,16 @@ class AnimationView extends React.Component {
             this.state.topLeft,
             {
               toValue: 100,
-              duration: 750,
+              duration: 700,
               easing: Easing.linear
+            }
+          ),
+          Animated.delay(200),
+          Animated.timing(
+            this.state.fadeOut,
+            {
+              toValue: 0,
+              duration: 500
             }
           )
         ])
@@ -127,7 +136,8 @@ class AnimationView extends React.Component {
               borderBottomLeftRadius: Animated.divide(this.state.bottomLeft, new Animated.Value(2)),
               borderTopRightRadius: Animated.divide(this.state.topRight, new Animated.Value(2)),
               borderTopLeftRadius: Animated.divide(this.state.topLeft, new Animated.Value(2))
-            }
+            },
+            {opacity: this.state.fadeOut}
           ]} />
       </View>
     )
